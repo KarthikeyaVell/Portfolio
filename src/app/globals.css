@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #f5f5f7;
+  --muted: #86868b;
+  --accent: #2997ff;
+  --surface: #121215;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flow-line {
+    animation: none;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(41, 151, 255, 0.35);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #2997ff;
+  outline-offset: 3px;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+.flow-line {
+  stroke: rgba(41, 151, 255, 0.45);
+  stroke-width: 0.35;
+  stroke-dasharray: 1.1 1.15;
+  animation: flow 1.6s linear infinite;
+}
+
+.flow-line[data-hot="true"] {
+  stroke: rgba(41, 151, 255, 0.95);
+  stroke-width: 0.5;
 }
